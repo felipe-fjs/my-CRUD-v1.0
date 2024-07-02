@@ -10,4 +10,18 @@ nem qualquer segurança ao projeto, coisas que irei adicionar/aperfeiçoar para 
     Tecnologias utilizadas:
         * Python
         * Flask
+            * render_template()
+            * request
+            * redirect()
+            * url_for()
+            * flash()
         * Mysql
+            * mysql-connector
+    
+    Para a conexão com o banco de dados criei/utilizado uma Classe "DbEscola" que contém os métodos:
+        * close()
+        * open()
+        * create()
+        * update()
+        * read()
+        * delete()
