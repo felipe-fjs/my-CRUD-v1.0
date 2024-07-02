@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+    {% block title %}Lista de colaborades{% endblock %}
+
+    {% block content %}
+    <div class="container">
+        {% set messages = get_flashed_messages() %}
+        {% for message in messages %}
+            <p class="alert alert-warn">{{message}}</p>
+        {% endfor %}
+        <table class="table table-info  table-striped-columns">
+            <thead>
+                <tr>
+                    <th>Matrícula</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Curso</th>
+                    <th class="text text-center">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if alunos %}
+                    {% for aluno in alunos: %}
+                        <tr >
+                            <td>{{ aluno.matricula }}</td>
+                            <td>{{ aluno.nome }}</td>
+                            <td>{{ aluno.email }}</td>
+                            <td>{{ aluno.curso }}</td>
+                            <td class="text text-center">
+                                <a class="text text-reset" href="{{url_for('update', matricula=aluno.matricula)}}">
+                                    <button class="btn btn-primary">Editar</button>
+                                </a>
+                                <a href="{{url_for('delete', matricula=aluno.matricula)}}" class="text text-danger">
+                                    <button class="btn btn-danger" value="{{aluno.matricula}}" >Excluir</button>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                <p class="alert alert-primary">Não há colaboradores a serem lidos! <a href="{{url_for('create')}}" class="text text-reset">inicio</a></p>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+    {% endblock %}

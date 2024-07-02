@@ -17,6 +17,7 @@ nem qualquer segurança ao projeto, coisas que irei adicionar/aperfeiçoar para 
             * flash()
         * Mysql
             * mysql-connector
+        * Bootstrap5
     
     Para a conexão com o banco de dados criei/utilizado uma Classe "DbEscola" que contém os métodos:
         * close()

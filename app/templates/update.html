@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+    {% block title %}Editar{% endblock %}
+    {% block style %}
+    <style>
+        main#main {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            width: 50vw;
+        }
+        form {
+            text-align: center;
+        }
+        
+    </style>
+    {% endblock %}
+    {% block content %}
+            <main id="main" class="container">
+                {% set messages = get_flashed_messages() %}
+                    {% for message in messages %}
+                            <p>{{message}}</p>
+                    {% endfor %}
+                {% if alunos %}
+                    <form action="{{url_for('update')}}" method="get">
+                        <p>
+                            <label for="matricula">Colaboradores</label>
+                            <input type="text" name="matricula" id="matricula" list="idlistcolabs">
+                            <datalist id="idlistcolabs">
+                                {% for aluno in alunos %}
+                                <option value="{{aluno.matricula}}" >{{ aluno.nome}}</option>
+                                {% endfor %}
+                            </datalist>
+                        </p>
+                        <button type="submit" class="btn btn-primary">Selecionar</button>
+                    </form>
+                {% elif aluno %}
+                    <div class="container">
+                        <form>
+                            <h3>Dado atual:</h3>
+                            <p>
+                                <label for="nome1">Nome: </label>
+                                <input type="text" name="nome1" id="nome1" disabled value="{{aluno.nome}}">
+                            </p>
+                            <p>
+                                <label for="email1">Email: </label>
+                                <input type="text" name="email1" id="email1" disabled value="{{aluno.email}}">
+                            </p>
+                            <p>
+                                <label for="curso1">curso: </label>
+                                <input type="text" name="curso1" id="curso1" disabled value="{{aluno.curso}}">
+                            </p>
+                        </form>
+                        <form action="{{url_for('update')}}" method="post">
+                            <h3>Dado atualizado:</h3>
+                            <p>
+                                <input type="hidden" name="matricula" value="{{aluno.matricula}}">
+                                <p>
+                                    <label for="nome">Nome: </label>
+                                    <input type="text" name="nome" id="nome">
+                                </p>
+                                <p>
+                                    <label for="email">Email: </label>
+                                    <input type="text" name="email" id="email">
+                                </p>
+                                <p>
+                                    <label for="curso">curso: </label>
+                                    <input type="text" name="curso" id="curso">
+                                </p>
+                            </p>
+                            <p>
+                                <button type="submit" class="btn btn-primary">Atualizar</button>
+                            </p>
+                        </form>
+                    </div>
+                {% else %}
+                <p class="alert alert-primary">Não há colaboradores a serem lidos! <a href="{{url_for('create')}}" class="text text-reset">inicio</a></p>
+                {% endif %}
+            </main>
+    {% endblock %}
